@@ -20,17 +20,21 @@ Now just run `OpenSim.exe` from the `bin` folder, and set up the region.
 
 ## Requirements
 
+  For building under linux the following is required:
+  * [dotnet-sdk > 5.0](https://docs.microsoft.com/en-us/dotnet/core/install/linux)
+
+ For running under linux the following is required:
  *	[Mono > 5.0](https://www.mono-project.com/download/stable/#download-lin)
  *	On some Linux distributions you may need to install additional packages.
- *	msbuild or xbuild(deprecated) if still supported by the mono version
  *   See [the wiki](http://opensimulator.org/wiki/Dependencies) for more information.
 
 ### Building
-  To create the project files, run:
+  To create the project files and build, run:
 
-  ```./runprebuild.sh```
+  ```dotnet build```
 
-  then run ```msbuild``` or ```xbuild``` if xbuild was installed.
+  To create the project files without building, run:
+  ```dotnet --restore```
 
 Configure. See below
 
@@ -41,6 +45,10 @@ For rebuilding and debugging use the msbuild option switches
   *  debug: (default) `msbuild /property:Configuration=Debug`
   *  release: `msbuild /property:Configuration=Release`
 
+Alternately you can use dotnet commands
+  *  clean: dotnet clean
+  *  debug: (default) `dotnet --configuration debug`
+  *  release: `dotnet --configuration release`
 
 # Configure #
 ## Standalone mode ##
@@ -57,7 +65,7 @@ The StandaloneCommon.ini file describes the database and backend services that O
 Each grid may have its own requirements, so FOLLOW your Grid instructions!
 in general:
 Copy `OpenSim.ini.example` to `OpenSim.ini` in the `bin/` directory, and verify the `[Const]` section, correcting for your case
- 
+
 On `[Architecture]` section uncomment only the line with Grid.ini if you do now want HG, or the line with GridHypergrid.ini if you do
 
 and copy the `GridCommon.ini.example` file to `GridCommon.ini` inside the `bin/config-include` directory and edit as necessary
